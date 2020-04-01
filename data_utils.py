@@ -19,7 +19,7 @@ def tokenize_example(example):
     return example    
 
 def load_data_yelp(args, set):
-    path = "../data/%s/%s.csv" % (args.data, set)    
+    path = "data/%s/%s.csv" % (args.data, set)    
     print("Loading yelp data from " + path)    
     csv = pandas.read_csv(path)
     data = []
@@ -38,7 +38,7 @@ def load_data_yelp(args, set):
 
 def load_data_sst(args, set):
     if set != "train":
-        path = "../data/%s/%s.txt" % (args.data, set)    
+        path = "data/%s/%s.txt" % (args.data, set)    
         print("Loading sst data from " + path) 
         data = []  
         with open(path) as file:
@@ -70,7 +70,7 @@ def load_data_sst(args, set):
                 if token == "-RRB-":
                     example["sent_a"][i] = ")"
     else:
-        path = "../data/sst/train-nodes.tsv"
+        path = "data/sst/train-nodes.tsv"
         print("Loading sst data from " + path) 
         data = []  
         with open(path) as file:

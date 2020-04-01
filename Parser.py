@@ -18,7 +18,7 @@ class Parser(object):
         parser.add_argument("--dir", type=str, default=None, required=True)
         parser.add_argument("--data", type=str, default=None,
                             choices=["yelp", "sst", "cifar", "mnist"], required=True)        
-        parser.add_argument("--base_dir", type=str, default="model_base")
+        parser.add_argument("--base_dir", type=str, default="data/model_base")
         parser.add_argument("--seed", type=int, default=0)
         parser.add_argument("--use_tsv", action="store_true")    
         parser.add_argument("--vocab_size", type=int, default=50000)

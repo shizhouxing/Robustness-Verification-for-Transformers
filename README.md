@@ -6,6 +6,8 @@ Cite this work:
 
 Zhouxing Shi, Huan Zhang, Kai-Wei Chang, Minlie Huang, Cho-Jui Hsieh. [Robustness Verification for Transformers](https://openreview.net/pdf?id=BJxwPJHFwS). ICLR 2020.
 
+**New work**: We have developed a stronger algorithm, auto_LiRPA, which can be used for robustness verification on general computational graphs and general perturbation specifications. See our latest [paper](https://arxiv.org/abs/2002.12920) and [code](https://github.com/KaidiXu/auto_LiRPA).
+
 ## Prerequisites
 
 We used Python 3 and PyTorch 1.3. To install the required python libraries with pip:
@@ -14,7 +16,7 @@ We used Python 3 and PyTorch 1.3. To install the required python libraries with 
 pip intall -r requirements.txt
 ```
 
-*Under construction: we will release some other downloadable dependencies soon.*
+Also, please [download data files](https://drive.google.com/file/d/1rD6Duo9Ur2QfuYTFUtZ0GDMA5v5PanfY/view?usp=sharing).
 
 ## Train models
 
