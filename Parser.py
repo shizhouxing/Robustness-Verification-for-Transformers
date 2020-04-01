@@ -15,19 +15,17 @@ class Parser(object):
         parser.add_argument("--word_label", action="store_true")
 
         # data
-        parser.add_argument("--dir", type=str, default="dev")
+        parser.add_argument("--dir", type=str, default=None, required=True)
+        parser.add_argument("--data", type=str, default=None,
+                            choices=["yelp", "sst", "cifar", "mnist"], required=True)        
         parser.add_argument("--base_dir", type=str, default="model_base")
         parser.add_argument("--seed", type=int, default=0)
-        parser.add_argument("--data", type=str, default="yelp",
-                            choices=["yelp", "sst", "cifar", "mnist"])
         parser.add_argument("--use_tsv", action="store_true")    
         parser.add_argument("--vocab_size", type=int, default=50000)
         parser.add_argument("--small", action="store_true")
         parser.add_argument("--debug", action="store_true")
         parser.add_argument("--use_dev", action="store_true")  
         parser.add_argument("--num_classes", type=int, default=2) 
-        parser.add_argument("--task", type=str, default="text_classification", 
-                            choices=["text_classification", "image"])
         
         # runtime
         parser.add_argument("--cpu", action="store_true")
@@ -61,7 +59,7 @@ class Parser(object):
         parser.add_argument("--log", type=str, default="log.txt")
         parser.add_argument("--res", type=str, default="res.json")
         parser.add_argument("--max_verify_length", type=int, default=32)
-        parser.add_argument("--method", type=str, default="forward",
+        parser.add_argument("--method", type=str, default="baf",
                             choices=["baf", "backward", "forward", "ibp", "discrete"])
         parser.add_argument("--num_verify_iters", type=int, default=10)
         parser.add_argument("--view_embed_dist", action="store_true")

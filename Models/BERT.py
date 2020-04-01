@@ -52,7 +52,6 @@ class BERT:
         self.seed = args.seed
         self.num_labels = args.num_labels
         self.label_list = range(args.num_labels) 
-        self.task = args.task
         self.num_train_optimization_steps = \
             args.num_epoches * (len(data_train) + args.batch_size - 1) // args.batch_size
         self.warmup_proportion = args.warmup
