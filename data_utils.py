@@ -2,7 +2,7 @@
 # Licenced under the BSD 2-Clause License.
 
 import numpy as np
-import json, re, os, nltk, pickle, gzip, pandas, random
+import json, re, os, nltk, pickle, gzip, random, csv
 import torch
 from tqdm import tqdm
 from multiprocessing import Pool
@@ -21,17 +21,19 @@ def tokenize_example(example):
 def load_data_yelp(args, set):
     path = "data/%s/%s.csv" % (args.data, set)    
     print("Loading yelp data from " + path)    
-    csv = pandas.read_csv(path)
     data = []
-    n = csv.shape[0]
-    for i in range(n):
-        text = csv["text"][i]
-        text = text.replace("\\n", " ")
-        text = text.replace('\\"', '"')
-        data.append({
-            "label": csv["label"][i],
-            "sent_a": text
-        })
+    with open(path) as file:
+        raw = csv.reader(file)
+        for row in raw:
+            if row[0] == "label": 
+                continue
+            text = row[1]
+            text = text.replace("\\n", " ")
+            text = text.replace('\\"', '"')
+            data.append({
+                "label": int(row[0]),
+                "sent_a": text
+            })
     with Pool(processes=args.cpus) as pool:
         data = pool.map(tokenize_example, data)   
     return data

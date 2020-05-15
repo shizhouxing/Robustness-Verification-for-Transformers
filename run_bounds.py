@@ -7,7 +7,6 @@ Computer certified bounds for main results
 
 import os, argparse, json
 from multiprocessing import Pool
-from utils import get_logdir
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--data", type=str, default=None, required=True)

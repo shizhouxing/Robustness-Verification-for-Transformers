@@ -10,7 +10,7 @@ Zhouxing Shi, Huan Zhang, Kai-Wei Chang, Minlie Huang, Cho-Jui Hsieh. [Robustnes
 
 ## Prerequisites
 
-We used Python 3 and PyTorch 1.3. To install the required python libraries with pip:
+We used Python 3. To install the required python libraries with pip:
 
 ```
 pip intall -r requirements.txt

@@ -17,7 +17,7 @@
 
 from __future__ import absolute_import, division, print_function
 
-import argparse, csv, logging, os, random, sys, shutil, scipy, pdb
+import argparse, csv, logging, os, random, sys, shutil, pdb
 import numpy as np
 import torch
 from torch.utils.data import (DataLoader, RandomSampler, SequentialSampler,
@@ -26,15 +26,13 @@ from torch.utils.data.distributed import DistributedSampler
 from tqdm import tqdm, trange
 
 from torch.nn import CrossEntropyLoss, MSELoss
-from scipy.stats import pearsonr, spearmanr
-from sklearn.metrics import matthews_corrcoef, f1_score
 
 from pytorch_pretrained_bert.file_utils import PYTORCH_PRETRAINED_BERT_CACHE, WEIGHTS_NAME, CONFIG_NAME
 from pytorch_pretrained_bert.tokenization import BertTokenizer
 from pytorch_pretrained_bert.optimization import BertAdam, WarmupLinearSchedule
 
 from Models.modeling import BertForSequenceClassification
-from Models.utils import truncate_seq_pair, acc_and_f1, InputExample, \
+from Models.utils import truncate_seq_pair, InputExample, \
     InputFeatures, convert_examples_to_features
 
 class BERT:
@@ -174,7 +172,7 @@ class BERT:
 
         preds = self.softmax(logits).detach().cpu().numpy()
         pred_labels = np.argmax(preds, axis=1)
-        acc = acc_and_f1(pred_labels, label_ids.cpu().numpy())["acc"]
+        acc = (pred_labels == label_ids.cpu().numpy()).mean()
 
         if infer_grad:
             gradients = torch.autograd.grad(loss, embedding_output)[0]
