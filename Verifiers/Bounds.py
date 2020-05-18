@@ -276,6 +276,18 @@ class Bounds:
             D^l[i][j][m] = -d^u[i][j]
     """
     def dot_product(self, other, debug=False, verbose=False, lower=True, upper=True):
+        if self.dim_in == 1:
+            l1, u1 = self.lb.unsqueeze(-2), self.ub.unsqueeze(-2)
+            l2, u2 = other.lb.unsqueeze(1), other.ub.unsqueeze(1)
+            prod1, prod2, prod3, prod4 = l1 * l2, l1 * u2, u1 * l2, u1 * u2
+            l = torch.min(torch.min(prod1, prod2), torch.min(prod3, prod4)).sum(-1)
+            u = torch.max(torch.max(prod1, prod2), torch.max(prod3, prod4)).sum(-1)
+            w = l.unsqueeze(-2) * 0
+            return Bounds(
+                self.args,  self.p, self.eps,
+                lw = w, lb = l, uw = w, ub = u
+            )
+
         start_time = time.time()
 
         l_a, u_a = self.concretize()
